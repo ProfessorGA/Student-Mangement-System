@@ -1,8 +1,149 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-4 alert alert-info">
+                <h3 class="text-center">Login</h3>
+                <form id="loginForm">
+                    <div id="msg" style="color: red;">
+                        Invalid Username or Password
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                            <input class="form-control" type="email" id="logmail" placeholder="Enter your Email" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input class="form-control" type="password" id="logpassword" placeholder="Enter your Password" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-info form-control" type="button" onclick="Login()">
+                            <i class="glyphicon glyphicon-log-in"></i> Login
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <a href="#" style="float:left">Forget Password ? </a>
+                        <a href="#" style="float:right">Sign Up </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="ShowModel">
+        <div class="model-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h4>Registartion Form</h4>
+                    <div id="message1">
+                        <div class="alert alert-success">
+                            <span class="glyphicon glyphicon-ok"></span>
+                            <strong id="successmessage">
+                                Success Message!<br />
+                                Send an email to your address with confirmation Link!
+                            </strong>
+                        </div>
+                    </div>
+                    <div id="message2">
+                        <div class="alert alert-success">
+                            <span class="glyphicon glyphicon-remove"></span>
+                            <strong id="errormessage">
+                                Error Message!<br />
+                                Your Registration isnotComplete
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form id="registation">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <sapn class="input-group-addon"><i class="glyphicon glyphicon-user"></i></sapn>
+                                <input class="form-control" type="text" id="user" name="username" placeholder="Enter your Name" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <sapn class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></sapn>
+                                <input class="form-control" type="email" id="Email" name="Email" placeholder="Enter your Email" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <sapn class="input-group-addon"><i class="glyphicon glyphicon-user"></i></sapn>
+                                <input class="form-control" type="text" id="DOB" name="DOB" placeholder="Enter your DOB" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <sapn class="input-group-addon"><i class="glyphicon glyphicon-user"></i></sapn>
+                                <input class="form-control" type="number" id="Age" name="Age" placeholder="Enter your Age" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <sapn class="input-group-addon"><i class="glyphicon glyphicon-user"></i></sapn>
+                                <input class="form-control" type="text" id="Gender" name="Gender" placeholder="Enter your Gender" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <sapn class="input-group-addon"><i class="glyphicon glyphicon-user"></i></sapn>
+                                <input class="form-control" type="text" id="PhoneNumber" name="PhoneNumber" placeholder="Enter your PhoneNumber" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <sapn class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></sapn>
+                                <input class="form-control" type="password" id="password" name="password" placeholder="Enter your Password" />
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group">
+                        <button class="btn btn-info form-control" type="submit" onclick="SaveForm()"><i class="glyphicon glyphicon-registrartion-mark"> Submit</i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function SignUp(){
+
+        }
+
+        function Saveform(){
+            var name = $('#user').val();
+            var pwd = $('#password').val();
+            var email = $('#email').val();
+            var dob = $('#dob').val();
+            var age = $('#age').val();
+            var gender = $('#gender').val();
+            var phonenumber = $('#phonenumber').val();
+        }
+    </script>
+
+</body>
+</html>

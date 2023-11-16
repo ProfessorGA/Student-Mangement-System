@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data;
+using System.Data.SqlClient;
 
 namespace Student_Mangement_System.Models
 {
@@ -24,7 +25,7 @@ namespace Student_Mangement_System.Models
                 int i = cmd.ExecuteNonQuery();
                 connection.Close();
                 string message = (string)cmd.Parameters["ErrorMessage"].Value;
-                if(i>0)
+                if (i > 0)
                 {
                     response.StatusCode = 200;
                     response.StatusMessage = message;
@@ -33,6 +34,36 @@ namespace Student_Mangement_System.Models
                 {
                     response.StatusCode = 100;
                     response.StatusMessage = message;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.StatusCode = 100;
+                response.StatusMessage = ex.Message;
+            }
+            return response;
+        }
+
+        public Response Login(Users users, SqlConnection connection)
+        {
+            Response response = new Response();
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter("sp_login", connection);
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+                da.SelectCommand.Parameters.AddWithValue("@Email", users.Email);
+                da.SelectCommand.Parameters.AddWithValue("@Password", users.Password);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                if (dt.Rows.Count > 0)
+                {
+                    response.StatusCode = 200;
+                    response.StatusMessage = "User is Valid";
+                }
+                else
+                {
+                    response.StatusCode = 100;
+                    response.StatusMessage = "User is Invalid";
                 }
             }
             catch (Exception ex)
